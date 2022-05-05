@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>浏览器解析流程和原理 - TulnersXu&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="苟有恒，何须三更眠五更起。">
+
+
+
+
+
+    <meta name="description" content="&amp;#x4ECE;&amp;#x8F93;&amp;#x5165; URL &amp;#x5230;&amp;#x9875;&amp;#x9762;&amp;#x52A0;&amp;#x8F7D;&amp;#x5B8C;&amp;#x6210;&amp;#x7684;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x90FD;&amp;#x53D1;&amp;#x751F;&amp;#x4E86;&amp;#x4EC0;&amp;#x4E48;&amp;#x4E8B;&amp;#x60C5;&amp;#xFF1F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器解析流程和原理">
+<meta property="og:url" content="http://example.com/2019/08/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%92%8C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="TulnersXu&#39;s Blog">
+<meta property="og:description" content="&amp;#x4ECE;&amp;#x8F93;&amp;#x5165; URL &amp;#x5230;&amp;#x9875;&amp;#x9762;&amp;#x52A0;&amp;#x8F7D;&amp;#x5B8C;&amp;#x6210;&amp;#x7684;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x90FD;&amp;#x53D1;&amp;#x751F;&amp;#x4E86;&amp;#x4EC0;&amp;#x4E48;&amp;#x4E8B;&amp;#x60C5;&amp;#xFF1F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-08-05T10:25:15.000Z">
+<meta property="article:modified_time" content="2021-02-17T12:06:14.453Z">
+<meta property="article:author" content="X1R">
+<meta property="article:tag" content="浏览器原理">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#从输入URL到浏览器接受发生了什么？">1&nbsp;&nbsp;<b>从输入URL到浏览器接受发生了什么？</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#浏览器如何向网卡发送数据？">2&nbsp;&nbsp;<b>浏览器如何向网卡发送数据？</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#数据如何从本机网卡发送到服务器？">3&nbsp;&nbsp;<b>数据如何从本机网卡发送到服务器？</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#服务器接收到数据后台会进行哪些处理？">4&nbsp;&nbsp;<b>服务器接收到数据后台会进行哪些处理？</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#服务器返回数据后浏览器如何处理？">5&nbsp;&nbsp;<b>服务器返回数据后浏览器如何处理？</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#浏览器如何将页面展现出来？">6&nbsp;&nbsp;<b>浏览器如何将页面展现出来？</b></a>
+                    
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            浏览器解析流程和原理
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-08-05T10:25:15.000Z" itemprop="datePublished">Aug 5 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 372 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><p>&#x4ECE;&#x8F93;&#x5165; URL &#x5230;&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x90FD;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#x4E8B;&#x60C5;&#xFF1F;</p>
+<a id="more"></a>
+
+<p><strong>&#x5177;&#x4F53;&#x53C2;&#x8003;</strong><br>    <a target="_blank" rel="noopener" href="http://fex.baidu.com/blog/2014/05/what-happen/">nwind&#x7684;fex</a></p>
+<p>&#x8FD9;&#x91CC;&#x76EE;&#x524D;&#x53EA;&#x505A;&#x7B80;&#x5355;&#x9610;&#x8FF0;&#xFF0C;&#x77E5;&#x8BC6;&#x6C34;&#x5E73;&#x672A;&#x5230;&#x3002;</p>
+<h3 id="&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;"></a>&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;</h3><ol>
+<li>&#x8F93;&#x5165;URL<pre><code> &#x952E;&#x76D8;or&#x89E6;&#x6478;&#x5C4F;</code></pre>
+</li>
+<li>CPU&#x5185;&#x90E8;&#x5904;&#x7406;<pre><code> `&#x79FB;&#x52A8;&#x8BBE;&#x5907;&#x4E2D;&#x7684; CPU &#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x82AF;&#x7247;&#xFF0C;&#x800C;&#x662F;&#x548C; GPU &#x7B49;&#x82AF;&#x7247;&#x96C6;&#x6210;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x88AB;&#x79F0;&#x4E3A; SoC&#xFF08;&#x7247;&#x4E0A;&#x7CFB;&#x7EDF;&#xFF09;&#x3002;`</code></pre>
+</li>
+<li>CPU&#x5230;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5185;&#x6838;</li>
+<li>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF; GUI &#x5230;&#x6D4F;&#x89C8;&#x5668;</li>
+</ol>
+<h3 id="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;"></a>&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;</h3><ol>
+<li><p>&#x6D4F;&#x89C8;&#x5668;&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x6838;</p>
+<p> &#x53EF;&#x4EE5;&#x7528;session&#x6765;&#x63A7;&#x5236;</p>
+</li>
+<li></li>
+</ol>
+<h3 id="&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;"><a href="#&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;" class="headerlink" title="&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;"></a>&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;</h3><ol>
+<li>&#x4ECE;&#x5185;&#x6838;&#x5230;&#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;(Network Interface Card)</li>
+<li>&#x8FD0;&#x8425;&#x5546;&#x7F51;&#x7EDC;&#x5185;&#x7684;&#x8DEF;&#x7531;</li>
+<li>&#x4E3B;&#x5E72;&#x7F51;&#x95F4;&#x7684;&#x4F20;&#x8F93;</li>
+<li>IDC &#x5185;&#x7F51;</li>
+<li>&#x670D;&#x52A1;&#x5668; CPU</li>
+</ol>
+<h3 id="&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;"><a href="#&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;"></a>&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;</h3><ol>
+<li>&#x8D1F;&#x8F7D;&#x5747;&#x8861;</li>
+<li>LVS</li>
+<li>&#x53CD;&#x5411;&#x4EE3;&#x7406;</li>
+<li>Web Server&#x4E2D;&#x7684;&#x5904;&#x7406;</li>
+<li>&#x8FDB;&#x5165;&#x540E;&#x7AEF;&#x8BED;&#x8A00;</li>
+<li>Web&#x6846;&#x67B6;</li>
+<li>&#x8BFB;&#x53D6;&#x6570;&#x636E;</li>
+</ol>
+<h3 id="&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;"><a href="#&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;"></a>&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;</h3><ol>
+<li>&#x4ECE;&#x4E8C;&#x8FDB;&#x5236;&#x4EE3;&#x7801;&#x5230;&#x5B57;&#x7B26;</li>
+<li>&#x5916;&#x94FE;&#x8D44;&#x6E90;&#x7684;&#x52A0;&#x8F7D;</li>
+<li>Javascript&#x7684;&#x6267;&#x884C;</li>
+<li>&#x4ECE;&#x5B57;&#x7B26;&#x5230;&#x56FE;&#x7247;</li>
+<li>&#x8DE8;&#x5E73;&#x53F0;2D&#x7ED8;&#x5236;&#x5E93;</li>
+<li>GPU&#x5408;&#x6210;</li>
+</ol>
+<p>**&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuezk/archive/2013/01/11/2855698.html">HTML&#x9875;&#x9762;&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;</a></p>
+<h3 id="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;"></a>&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;</h3><ol>
+<li>Framebuffer(&#x5E27;&#x7F13;&#x5B58;&#x5668;)</li>
+<li>&#x4ECE;&#x5185;&#x5B58;&#x5230;&#x663E;&#x793A;&#x5668;</li>
+</ol>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/">#浏览器原理</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/08/06/Failed_to_start_php_fpm_service_Unit_php_fpm_service_not_found/">Failed to start php-fpm.service: Unit php-fpm.service not found.</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/08/05/HTTP%E5%8D%8F%E8%AE%AE%E4%B9%8BHTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/">HTTP协议之HTTP请求和响应</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="SOHUCS" sid="2019/08/05/浏览器解析流程和原理/"></div>
+<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+    appid: 'cyv4cV7wa',
+    conf: '36cfe50d5b00bf2874f82a61d59d9a8a'
+});
+</script>
+
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 X1R&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/TulnersXu">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+</body>
+</html>

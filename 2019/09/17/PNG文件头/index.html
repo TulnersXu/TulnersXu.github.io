@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head>
+    <meta charset="utf-8">
+<title>PNG文件头 - TulnersXu&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+
+
+<meta name="description" content="苟有恒，何须三更眠五更起。">
+
+
+
+
+
+    <meta name="description" content="PNG&amp;#x6587;&amp;#x4EF6;&amp;#x5934;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PNG文件头">
+<meta property="og:url" content="http://example.com/2019/09/17/PNG%E6%96%87%E4%BB%B6%E5%A4%B4/index.html">
+<meta property="og:site_name" content="TulnersXu&#39;s Blog">
+<meta property="og:description" content="PNG&amp;#x6587;&amp;#x4EF6;&amp;#x5934;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-09-17T11:25:18.000Z">
+<meta property="article:modified_time" content="2021-02-17T12:10:28.125Z">
+<meta property="article:author" content="X1R">
+<meta property="article:tag" content="文件头">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item "
+               href="/archives">Archives</a>
+            
+            <a class="navbar-item "
+               href="/categories">Categories</a>
+            
+            <a class="navbar-item "
+               href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            PNG文件头
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-17T11:25:18.000Z" itemprop="datePublished">Sep 17 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            a minute read (About 172 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <html><head></head><body><p>PNG&#x6587;&#x4EF6;&#x5934;</p>
+<a id="more"></a>
+
+<ul>
+<li>&#xFF08;&#x56FA;&#x5B9A;&#xFF09;&#x516B;&#x4E2A;&#x5B57;&#x8282;89 50 4E 47 0D 0A 1A 0A&#x4E3A;png&#x7684;&#x6587;&#x4EF6;&#x5934;</li>
+<li>&#xFF08;&#x56FA;&#x5B9A;&#xFF09;&#x56DB;&#x4E2A;&#x5B57;&#x8282;00 00 00 0D&#xFF08;&#x5373;&#x4E3A;&#x5341;&#x8FDB;&#x5236;&#x7684;13&#xFF09;&#x4EE3;&#x8868;&#x6570;&#x636E;&#x5757;&#x7684;&#x957F;&#x5EA6;&#x4E3A;13</li>
+<li>&#xFF08;&#x56FA;&#x5B9A;&#xFF09;&#x56DB;&#x4E2A;&#x5B57;&#x8282;49 48 44 52&#xFF08;&#x5373;&#x4E3A;ASCII&#x7801;&#x7684;IHDR&#xFF09;&#x662F;&#x6587;&#x4EF6;&#x5934;&#x6570;&#x636E;&#x5757;&#x7684;&#x6807;&#x793A;&#xFF08;IDCH&#xFF09;</li>
+<li>&#xFF08;&#x53EF;&#x53D8;&#xFF09;13&#x4F4D;&#x6570;&#x636E;&#x5757;&#xFF08;IHDR)<ul>
+<li>&#x524D;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x4EE3;&#x8868;&#x8BE5;&#x56FE;&#x7247;&#x7684;&#x5BBD;</li>
+<li>&#x540E;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x4EE3;&#x8868;&#x8BE5;&#x56FE;&#x7247;&#x7684;&#x9AD8;</li>
+<li>&#x540E;&#x4E94;&#x4E2A;&#x5B57;&#x8282;&#x4F9D;&#x6B21;&#x4E3A;&#xFF1A;<br>Bit depth&#x3001;ColorType&#x3001;Compression method&#x3001;Filter method&#x3001;Interlace method</li>
+</ul>
+</li>
+<li>&#xFF08;&#x53EF;&#x53D8;&#xFF09;&#x5269;&#x4F59;&#x56DB;&#x5B57;&#x8282;&#x4E3A;&#x8BE5;png&#x7684;CRC&#x68C0;&#x9A8C;&#x7801;&#xFF0C;&#x7531;&#x4ECE;IDCH&#x5230;IHDR&#x7684;&#x5341;&#x4E03;&#x4F4D;&#x5B57;&#x8282;&#x8FDB;&#x884C;crc&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x3002;</li>
+</ul>
+</body></html>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/%E6%96%87%E4%BB%B6%E5%A4%B4/">#文件头</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2019/09/20/%E6%B5%85%E8%B0%88PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">浅谈PHP反序列化</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2019/09/14/sqli-labs-less5-6%E5%88%9D%E7%BA%A7%E7%89%88/">sqli-labs less5-6初级版</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="SOHUCS" sid="2019/09/17/PNG文件头/"></div>
+<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+    appid: 'cyv4cV7wa',
+    conf: '36cfe50d5b00bf2874f82a61d59d9a8a'
+});
+</script>
+
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 X1R&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        target="_blank" rel="noopener" href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" target="_blank" rel="noopener" href="https://github.com/TulnersXu">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+
+<script src="/js/script.js"></script>
+
+
+    
+</body>
+</html>
