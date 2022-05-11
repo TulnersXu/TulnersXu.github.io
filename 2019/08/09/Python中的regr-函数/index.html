@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5F00;&amp;#x59CB;&amp;#x51C6;&amp;#x5907;&amp;#x5165;&amp;#x95E8;Python&amp;#xFF0C;&amp;#x5165;&amp;#x95E8;&amp;#x7684;&amp;#x8BED;&amp;#x6CD5;&amp;#x89C9;&amp;#x5F97;&amp;#x633A;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#xFF08;&amp;#x6709;&amp;#x4E9B;&amp;#x7F16;&amp;#">
+    <meta name="description" content="今天开始准备入门Python，入门的语法觉得挺简单的（有些编程语言基础）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python中的regr()函数">
 <meta property="og:url" content="http://example.com/2019/08/09/Python%E4%B8%AD%E7%9A%84regr-%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5F00;&amp;#x59CB;&amp;#x51C6;&amp;#x5907;&amp;#x5165;&amp;#x95E8;Python&amp;#xFF0C;&amp;#x5165;&amp;#x95E8;&amp;#x7684;&amp;#x8BED;&amp;#x6CD5;&amp;#x89C9;&amp;#x5F97;&amp;#x633A;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#xFF08;&amp;#x6709;&amp;#x4E9B;&amp;#x7F16;&amp;#">
+<meta property="og:description" content="今天开始准备入门Python，入门的语法觉得挺简单的（有些编程语言基础）。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-08-08T16:04:14.000Z">
 <meta property="article:modified_time" content="2020-11-14T17:57:13.836Z">
@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -146,10 +146,10 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>&#x4ECA;&#x5929;&#x5F00;&#x59CB;&#x51C6;&#x5907;&#x5165;&#x95E8;Python&#xFF0C;&#x5165;&#x95E8;&#x7684;&#x8BED;&#x6CD5;&#x89C9;&#x5F97;&#x633A;&#x7B80;&#x5355;&#x7684;&#xFF08;&#x6709;&#x4E9B;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x57FA;&#x7840;&#xFF09;&#x3002;</p>
-<a id="more"></a>
+        <html><head></head><body><p>今天开始准备入门Python，入门的语法觉得挺简单的（有些编程语言基础）。</p>
+<span id="more"></span>
 
-<p>&#x9047;&#x5230;&#x4E2A;&#x6709;&#x8DA3;&#x7684;&#x65B0;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x51FD;&#x6570;repr()&#xFF0C;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x7684;&#x89E3;&#x91CA;</p>
+<p>遇到个有趣的新类型转换函数repr()，官方文档的解释</p>
 <blockquote>
 <p>repr(object)</p>
 </blockquote>
@@ -159,12 +159,13 @@
 </blockquote>
 </blockquote>
 <hr>
-<p>&#x529F;&#x80FD;&#x4E0A;&#x548C;str()&#x5DEE;&#x4E0D;&#x591A;&#xFF0C;repr()&#x5BF9;&#x89E3;&#x91CA;&#x5668;&#x66F4;&#x52A0;&#x53CB;&#x597D;&#xFF0C;&#x7528;&#x6B64;&#x51FD;&#x6570;&#x8F6C;&#x5316;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x53EF;&#x4EE5;&#x88AB;eval()&#x51FD;&#x6570;&#x76F4;&#x63A5;&#x6267;&#x884C;&#xFF0C;&#x800C;str()&#x5C31;&#x4E0D;&#x884C;&#x3002;<br>&#x53E6;&#x5916;repr()&#x51FD;&#x6570;&#x8F6C;&#x5316;&#x51FA;&#x7684;&#x6D6E;&#x70B9;&#x6570;&#x7CBE;&#x786E;&#x5EA6;&#x66F4;&#x9AD8;&#x3002;</p>
+<p>功能上和str()差不多，repr()对解释器更加友好，用此函数转化的字符串可以被eval()函数直接执行，而str()就不行。<br>另外repr()函数转化出的浮点数精确度更高。</p>
 <pre><code>&gt;&gt;&gt;repr(1.0/6.0)
-&apos;&apos;0.16666666666666666&apos;
+''0.16666666666666666'
 
 &gt;&gt;&gt; str(1.0/6.0)
-&apos;0.166666666667&apos;</code></pre>
+'0.166666666667'
+</code></pre>
 </body></html>
     
     </div>

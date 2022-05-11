@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x5B9A;&amp;#x4E49;">
+    <meta name="description" content="定义">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql的UDF函数">
 <meta property="og:url" content="http://example.com/2019/09/06/mysql%E7%9A%84UDF%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="&amp;#x5B9A;&amp;#x4E49;">
+<meta property="og:description" content="定义">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-09-05T17:27:42.000Z">
 <meta property="article:modified_time" content="2021-02-17T12:08:54.354Z">
@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -150,21 +150,21 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>&#x5B9A;&#x4E49;</p>
-<a id="more"></a>
+        <html><head></head><body><p>定义</p>
+<span id="more"></span>
 
-<p>UDF&#x51FD;&#x6570;&#x662F;mysql&#x7ED9;&#x4F7F;&#x7528;&#x8005;&#x63D0;&#x4F9B;&#x7684;&#x6DFB;&#x52A0;&#x65B0;&#x51FD;&#x6570;&#x7684;&#x673A;&#x5236;(User Define Function)&#x3002;&#x5176;&#x6709;&#x4E09;&#x79CD;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x5206;&#x522B;&#x662F;</p>
+<p>UDF函数是mysql给使用者提供的添加新函数的机制(User Define Function)。其有三种返回值，分别是</p>
 <ol>
-<li>STRING &#x5B57;&#x7B26;&#x578B;(char *)</li>
-<li>INTEGER &#x6574;&#x578B;(long long)</li>
-<li>REAL &#x5B9E;&#x6570;&#x578B;(double)</li>
+<li>STRING 字符型(char *)</li>
+<li>INTEGER 整型(long long)</li>
+<li>REAL 实数型(double)</li>
 </ol>
-<h2 id="&#x683C;&#x5F0F;"><a href="#&#x683C;&#x5F0F;" class="headerlink" title="&#x683C;&#x5F0F;"></a>&#x683C;&#x5F0F;</h2><figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE&#x3000;[AGGREGATE] FUNCTION function_name RETURNS {STRING | INTEGER | REAL} SONAME &apos;&#x6587;&#x4EF6;&#x540D;&apos;</span><br><span class="line"></span><br><span class="line"># [AGGREATE]&#x662F;&#x805A;&#x96C6;&#x51FD;&#x6570;&#x7684;&#x8868;&#x793A;&#xFF0C;&#x7CFB;&#x7EDF;&#x5B9A;&#x4E49;&#x7684;&#x805A;&#x96C6;&#x51FD;&#x6570;&#x6709;COUNT()&#x3001;AVE()&#x3001;MN()&#x3001;MAX()&#x3001;SUM()&#x7B49;</span><br><span class="line"></span><br><span class="line"># SONAME &apos;file&apos; &#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4ECE;&#x54EA;&#x4E2A;&#x6587;&#x4EF6;&#x91CC;&#x9762;&#x5F15;&#x5165;&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x4E00;&#x822C;&#x662F;&#x52A8;&#x6001;&#x94FE;&#x63A5;&#x5E93;&#xFF0C;Windows&#x4E0B;&#x662F;dll&#xFF0C;Linux&#x4E0B;&#x662F;so&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x8981;&#x5728;mysql&#x7684;plugin&#x76EE;&#x5F55;&#x4E0B;</span><br><span class="line"></span><br><span class="line">#&#x5220;&#x9664;&#x81EA;&#x5B9A;&#x4E49;&#x76EE;&#x5F55; DROP FUNCTION function_name</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><figure class="highlight plaintext hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE　[AGGREGATE] FUNCTION function_name RETURNS {STRING | INTEGER | REAL} SONAME '文件名'</span><br><span class="line"></span><br><span class="line"># [AGGREATE]是聚集函数的表示，系统定义的聚集函数有COUNT()、AVE()、MN()、MAX()、SUM()等</span><br><span class="line"></span><br><span class="line"># SONAME 'file' 表示这个函数从哪个文件里面引入，这个文件一般是动态链接库，Windows下是dll，Linux下是so，并且这个文件要在mysql的plugin目录下</span><br><span class="line"></span><br><span class="line">#删除自定义目录 DROP FUNCTION function_name</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>notice:</strong></p>
-<p>mysql&#x7248;&#x672C;&#x5982;&#x679C;&#x5728;5.1&#x4EE5;&#x4E0A;&#xFF0C;udf.dll&#x6587;&#x4EF6;&#x5FC5;&#x987B;&#x653E;&#x7F6E;&#x5728;mysql&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E0B;&#x7684;lib\plugin&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x3002;</p>
-<p>mysql&#x7248;&#x672C;&#x5982;&#x679C;&#x5728;5.1&#x4EE5;&#x4E0B;&#xFF0C;udf.dll&#x6587;&#x4EF6;&#x5728;Windows server 2003&#x4E0B;&#x653E;&#x7F6E;&#x4E8E;C:\Windows\system32&#x76EE;&#x5F55;&#xFF0C;&#x5982;&#x679C;&#x5220;&#x9664;&#x51FD;&#x6570;&#xFF0C;udf&#x6587;&#x4EF6;&#x5FC5;&#x987B;&#x8FD8;&#x5B58;&#x5728;&#x4E8E;plugin&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
-<p>&#x5982;&#x679C;mysql&#x52A0;&#x8F7D;&#x4E86;udf.so&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x5220;&#x9664;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x524D;&#xFF0C;&#x628A;plugin&#x76EE;&#x5F55;&#x4E0B;&#x5BFC;&#x5165;&#x7684;udf.so&#x6587;&#x4EF6;&#x5229;&#x7528;rm&#x547D;&#x4EE4;&#x5220;&#x9664;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x5BFC;&#x5165;&#x7684;mysql&#x51FD;&#x6570;&#x5C31;&#x65E0;&#x6CD5;&#x88AB;&#x5220;&#x9664;&#x3002;&#x5982;&#x679C;&#x4E4B;&#x540E;&#x521B;&#x5EFA;&#x7684;&#x51FD;&#x6570;&#x540D;&#x5B57;&#x548C;&#x8BE5;&#x51FD;&#x6570;&#x51B2;&#x7A81;&#xFF0C;mysql&#x5C31;&#x4E0D;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x3002;</p>
+<p>mysql版本如果在5.1以上，udf.dll文件必须放置在mysql安装目录下的lib\plugin文件夹下。</p>
+<p>mysql版本如果在5.1以下，udf.dll文件在Windows server 2003下放置于C:\Windows\system32目录，如果删除函数，udf文件必须还存在于plugin目录下。</p>
+<p>如果mysql加载了udf.so文件中的某个函数，在没有删除这个函数前，把plugin目录下导入的udf.so文件利用rm命令删除了，那么这个导入的mysql函数就无法被删除。如果之后创建的函数名字和该函数冲突，mysql就不允许创建。</p>
 </body></html>
     
     </div>

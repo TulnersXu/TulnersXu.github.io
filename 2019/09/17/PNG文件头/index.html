@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="PNG&amp;#x6587;&amp;#x4EF6;&amp;#x5934;">
+    <meta name="description" content="PNG文件头">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PNG文件头">
 <meta property="og:url" content="http://example.com/2019/09/17/PNG%E6%96%87%E4%BB%B6%E5%A4%B4/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="PNG&amp;#x6587;&amp;#x4EF6;&amp;#x5934;">
+<meta property="og:description" content="PNG文件头">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-09-17T11:25:18.000Z">
 <meta property="article:modified_time" content="2021-02-17T12:10:28.125Z">
@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -146,20 +146,20 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>PNG&#x6587;&#x4EF6;&#x5934;</p>
-<a id="more"></a>
+        <html><head></head><body><p>PNG文件头</p>
+<span id="more"></span>
 
 <ul>
-<li>&#xFF08;&#x56FA;&#x5B9A;&#xFF09;&#x516B;&#x4E2A;&#x5B57;&#x8282;89 50 4E 47 0D 0A 1A 0A&#x4E3A;png&#x7684;&#x6587;&#x4EF6;&#x5934;</li>
-<li>&#xFF08;&#x56FA;&#x5B9A;&#xFF09;&#x56DB;&#x4E2A;&#x5B57;&#x8282;00 00 00 0D&#xFF08;&#x5373;&#x4E3A;&#x5341;&#x8FDB;&#x5236;&#x7684;13&#xFF09;&#x4EE3;&#x8868;&#x6570;&#x636E;&#x5757;&#x7684;&#x957F;&#x5EA6;&#x4E3A;13</li>
-<li>&#xFF08;&#x56FA;&#x5B9A;&#xFF09;&#x56DB;&#x4E2A;&#x5B57;&#x8282;49 48 44 52&#xFF08;&#x5373;&#x4E3A;ASCII&#x7801;&#x7684;IHDR&#xFF09;&#x662F;&#x6587;&#x4EF6;&#x5934;&#x6570;&#x636E;&#x5757;&#x7684;&#x6807;&#x793A;&#xFF08;IDCH&#xFF09;</li>
-<li>&#xFF08;&#x53EF;&#x53D8;&#xFF09;13&#x4F4D;&#x6570;&#x636E;&#x5757;&#xFF08;IHDR)<ul>
-<li>&#x524D;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x4EE3;&#x8868;&#x8BE5;&#x56FE;&#x7247;&#x7684;&#x5BBD;</li>
-<li>&#x540E;&#x56DB;&#x4E2A;&#x5B57;&#x8282;&#x4EE3;&#x8868;&#x8BE5;&#x56FE;&#x7247;&#x7684;&#x9AD8;</li>
-<li>&#x540E;&#x4E94;&#x4E2A;&#x5B57;&#x8282;&#x4F9D;&#x6B21;&#x4E3A;&#xFF1A;<br>Bit depth&#x3001;ColorType&#x3001;Compression method&#x3001;Filter method&#x3001;Interlace method</li>
+<li>（固定）八个字节89 50 4E 47 0D 0A 1A 0A为png的文件头</li>
+<li>（固定）四个字节00 00 00 0D（即为十进制的13）代表数据块的长度为13</li>
+<li>（固定）四个字节49 48 44 52（即为ASCII码的IHDR）是文件头数据块的标示（IDCH）</li>
+<li>（可变）13位数据块（IHDR)<ul>
+<li>前四个字节代表该图片的宽</li>
+<li>后四个字节代表该图片的高</li>
+<li>后五个字节依次为：<br>Bit depth、ColorType、Compression method、Filter method、Interlace method</li>
 </ul>
 </li>
-<li>&#xFF08;&#x53EF;&#x53D8;&#xFF09;&#x5269;&#x4F59;&#x56DB;&#x5B57;&#x8282;&#x4E3A;&#x8BE5;png&#x7684;CRC&#x68C0;&#x9A8C;&#x7801;&#xFF0C;&#x7531;&#x4ECE;IDCH&#x5230;IHDR&#x7684;&#x5341;&#x4E03;&#x4F4D;&#x5B57;&#x8282;&#x8FDB;&#x884C;crc&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x3002;</li>
+<li>（可变）剩余四字节为该png的CRC检验码，由从IDCH到IHDR的十七位字节进行crc计算得到。</li>
 </ul>
 </body></html>
     

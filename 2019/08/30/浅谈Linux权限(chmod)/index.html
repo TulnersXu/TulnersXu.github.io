@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -147,24 +147,24 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <html><head></head><body><p>chmod</p>
-<a id="more"></a>
+<span id="more"></span>
 
 
-<p>&#x53C2;&#x8003;&#x81EA;</p>
+<p>参考自</p>
 <p><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2016-12/138322.htm" title="https://www.linuxidc.com/Linux/2016-12/138322.htm">https://www.linuxidc.com/Linux/2016-12/138322.htm</a></p>
-<p><strong>Linux&#x4E2D;&#x8BBE;&#x7F6E;&#x6743;&#x9650;&#xFF0C;&#x4E00;&#x822C;&#x7528;chmod&#x547D;&#x4EE4;&#x3002;</strong></p>
+<p><strong>Linux中设置权限，一般用chmod命令。</strong></p>
 <ol>
-<li><p>&#x5E38;&#x7528;&#x53C2;&#x6570;:<br>chmod+x    &#x6267;&#x884C;&#x6743;execute</p>
-<p>chmod+w    &#x5199;&#x6743;write</p>
-<p>chmod+r    &#x8BFB;&#x6743;read</p>
+<li><p>常用参数:<br>chmod+x    执行权execute</p>
+<p>chmod+w    写权write</p>
+<p>chmod+r    读权read</p>
 </li>
 </ol>
-<p>&#x8BBE;&#x7F6E;&#x6743;&#x9650;&#x540E;&#xFF0C;&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;&#x7684;&#x6587;&#x4EF6;&#x62E5;&#x6709;&#x6B64;&#x76EE;&#x5F55;&#x6240;&#x5C5E;&#x7EC4;&#x7684;&#x6743;&#x9650;</p>
-<p>stickybit(&#x53EA;&#x5BF9;&#x6587;&#x4EF6;&#x6709;&#x6548;)&#x8BBE;&#x7F6E;&#x540E;&#xFF0C;&#x6587;&#x4EF6;&#x4E0D;&#x53EF;&#x88AB;&#x5220;&#x9664;</p>
-<p>setgid(&#x53EA;&#x5BF9;&#x76EE;&#x5F55;&#x6709;&#x6548;)</p>
+<p>设置权限后，目录下创建的文件拥有此目录所属组的权限</p>
+<p>stickybit(只对文件有效)设置后，文件不可被删除</p>
+<p>setgid(只对目录有效)</p>
 <ol start="2">
-<li><p>&#x683C;&#x5F0F;: </p>
-<p><strong>chmod+&#x53C2;&#x6570; &#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x540D;</strong></p>
+<li><p>格式: </p>
+<p><strong>chmod+参数 文件或目录名</strong></p>
 </li>
 </ol>
 </body></html>

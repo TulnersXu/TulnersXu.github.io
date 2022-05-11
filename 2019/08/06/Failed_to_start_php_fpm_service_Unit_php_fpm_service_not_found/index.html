@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x51C6;&amp;#x5907;&amp;#x7528;PHP&amp;#x73AF;&amp;#x5883;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#xFF0C;&amp;#x63D0;&amp;#x793A;">
+    <meta name="description" content="今天准备用PHP环境的时候，提示">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Failed to start php-fpm.service: Unit php-fpm.service not found.">
 <meta property="og:url" content="http://example.com/2019/08/06/Failed_to_start_php_fpm_service_Unit_php_fpm_service_not_found/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x51C6;&amp;#x5907;&amp;#x7528;PHP&amp;#x73AF;&amp;#x5883;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#xFF0C;&amp;#x63D0;&amp;#x793A;">
+<meta property="og:description" content="今天准备用PHP环境的时候，提示">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190806200916812.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019080620104179.png">
@@ -70,7 +70,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -149,14 +149,14 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>&#x4ECA;&#x5929;&#x51C6;&#x5907;&#x7528;PHP&#x73AF;&#x5883;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x63D0;&#x793A;</p>
-<a id="more"></a>
+        <html><head></head><body><p>今天准备用PHP环境的时候，提示</p>
+<span id="more"></span>
 
-<p><code>Failed to start php-fpm.service: Unit php-fpm.service not found.&#x3002;</code></p>
-<p><code>systemctl status-all</code>&#x4E4B;&#x540E;&#xFF0C;&#x6CA1;&#x6709;&#x627E;&#x5230;PHP&#x76F8;&#x5173;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x9042;Google&#x4E00;&#x6CE2;&#xFF0C;&#x89E3;&#x51B3;&#x4E86;&#x3002;&#x5148;&#x628A;&#x535A;&#x4E3B;&#x7684;&#x8FD9;&#x7BC7;&#x535A;&#x5BA2;CtrlV&#x81F3;&#x6B64;<a target="_blank" rel="noopener" href="https://blog.meathill.com/tech/serverside/failed-to-start-php-fpm-service-unit-php-fpm-service-is-masked.html" title="https://blog.meathill.com/tech/serverside/failed-to-start-php-fpm-service-unit-php-fpm-service-is-masked.html">https://blog.meathill.com/tech/serverside/failed-to-start-php-fpm-service-unit-php-fpm-service-is-masked.html</a></p>
-<p>&#x6B63;&#x9898;&#xFF0C;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x6211;&#x7684;php-fpm&#x6CA1;&#x88C5;&#xFF0C;&#x90A3;&#x5C31;&#x6765;&#x5427;&#xFF0C;<code>apt install php-fpm</code> </p>
-<p>&#x5B89;&#x88C5;&#x7ED3;&#x675F;&#x540E;&#x5B83;&#x4F1A;&#x81EA;&#x52A8;&#x6620;&#x5C04;PHP&#x7248;&#x672C;&#x3002;<br><img src="https://img-blog.csdnimg.cn/20190806200916812.png" alt="php-fpm"></p>
-<p>&#x5927;&#x529F;&#x544A;&#x6210;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;<code>systemctl start php7.3-fpm</code>&#x5C31;&#x53EF;&#x4EE5;&#x5B89;&#x5FC3;&#x4EAB;&#x7528;&#x4E86;&#x3002;</p>
+<p><code>Failed to start php-fpm.service: Unit php-fpm.service not found.。</code></p>
+<p><code>systemctl status-all</code>之后，没有找到PHP相关的服务，遂Google一波，解决了。先把博主的这篇博客CtrlV至此<a target="_blank" rel="noopener" href="https://blog.meathill.com/tech/serverside/failed-to-start-php-fpm-service-unit-php-fpm-service-is-masked.html" title="https://blog.meathill.com/tech/serverside/failed-to-start-php-fpm-service-unit-php-fpm-service-is-masked.html">https://blog.meathill.com/tech/serverside/failed-to-start-php-fpm-service-unit-php-fpm-service-is-masked.html</a></p>
+<p>正题，很简单，我的php-fpm没装，那就来吧，<code>apt install php-fpm</code> </p>
+<p>安装结束后它会自动映射PHP版本。<br><img src="https://img-blog.csdnimg.cn/20190806200916812.png" alt="php-fpm"></p>
+<p>大功告成，接下来<code>systemctl start php7.3-fpm</code>就可以安心享用了。</p>
 <p><img src="https://img-blog.csdnimg.cn/2019080620104179.png" alt="service"></p>
 </body></html>
     

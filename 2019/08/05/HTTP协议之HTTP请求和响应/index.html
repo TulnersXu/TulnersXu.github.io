@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x5728;HTTP&amp;#x8FDE;&amp;#x63A5;&amp;#x4E2D;&amp;#x62A5;&amp;#x6587;&amp;#x5206;&amp;#x4E3A;&amp;#x8BF7;&amp;#x6C42;&amp;#xFF08;request&amp;#xFF09;&amp;#x548C;&amp;#x54CD;&amp;#x5E94;&amp;#xFF08;response&amp;#xFF09;&amp;#x4E24;&amp;#x79CD;&amp;#x3002;&amp;#x6BCF;&amp;#x79CD;&amp;#x62">
+    <meta name="description" content="在HTTP连接中报文分为请求（request）和响应（response）两种。每种报文在HTTP首部都有不同的字段来标识不同的用途。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP协议之HTTP请求和响应">
 <meta property="og:url" content="http://example.com/2019/08/05/HTTP%E5%8D%8F%E8%AE%AE%E4%B9%8BHTTP%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="&amp;#x5728;HTTP&amp;#x8FDE;&amp;#x63A5;&amp;#x4E2D;&amp;#x62A5;&amp;#x6587;&amp;#x5206;&amp;#x4E3A;&amp;#x8BF7;&amp;#x6C42;&amp;#xFF08;request&amp;#xFF09;&amp;#x548C;&amp;#x54CD;&amp;#x5E94;&amp;#xFF08;response&amp;#xFF09;&amp;#x4E24;&amp;#x79CD;&amp;#x3002;&amp;#x6BCF;&amp;#x79CD;&amp;#x62">
+<meta property="og:description" content="在HTTP连接中报文分为请求（request）和响应（response）两种。每种报文在HTTP首部都有不同的字段来标识不同的用途。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-08-05T01:28:08.000Z">
 <meta property="article:modified_time" content="2021-02-17T12:07:48.205Z">
@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -190,91 +190,95 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p><strong>&#x5728;HTTP&#x8FDE;&#x63A5;&#x4E2D;&#x62A5;&#x6587;&#x5206;&#x4E3A;&#x8BF7;&#x6C42;&#xFF08;request&#xFF09;&#x548C;&#x54CD;&#x5E94;&#xFF08;response&#xFF09;&#x4E24;&#x79CD;&#x3002;&#x6BCF;&#x79CD;&#x62A5;&#x6587;&#x5728;HTTP&#x9996;&#x90E8;&#x90FD;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5B57;&#x6BB5;&#x6765;&#x6807;&#x8BC6;&#x4E0D;&#x540C;&#x7684;&#x7528;&#x9014;&#x3002;</strong></p>
-<a id="more"></a>
+        <html><head></head><body><p><strong>在HTTP连接中报文分为请求（request）和响应（response）两种。每种报文在HTTP首部都有不同的字段来标识不同的用途。</strong></p>
+<span id="more"></span>
 
-<p><strong>HTTP&#x8BF7;&#x6C42;&#x5305;&#x62EC;&#x8BF7;&#x6C42;&#x884C;&#xFF0C;&#x8BF7;&#x6C42;&#x5934;&#xFF0C;&#x8BF7;&#x6C42;&#x6B63;&#x6587;</strong><br><strong>HTTP&#x54CD;&#x5E94;&#x5305;&#x62EC;&#x54CD;&#x5E94;&#x884C;&#xFF0C;&#x54CD;&#x5E94;&#x5934;&#xFF0C;&#x54CD;&#x5E94;&#x6B63;&#x6587;</strong></p>
-<h2 id="&#x8BF7;&#x6C42;-Request"><a href="#&#x8BF7;&#x6C42;-Request" class="headerlink" title="&#x8BF7;&#x6C42;(Request)"></a>&#x8BF7;&#x6C42;(Request)</h2><h3 id="HTTP&#x534F;&#x8BAE;&#x4E2D;&#x5171;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x6765;&#x8868;&#x660E;&#x5BF9;Request-URI&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;&#x3002;"><a href="#HTTP&#x534F;&#x8BAE;&#x4E2D;&#x5171;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x6765;&#x8868;&#x660E;&#x5BF9;Request-URI&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;&#x3002;" class="headerlink" title="HTTP&#x534F;&#x8BAE;&#x4E2D;&#x5171;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x6765;&#x8868;&#x660E;&#x5BF9;Request-URI&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;&#x3002;"></a>HTTP&#x534F;&#x8BAE;&#x4E2D;&#x5171;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x6765;&#x8868;&#x660E;&#x5BF9;Request-URI&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x7684;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;&#x3002;</h3><pre><code>1. GET&#xFF1A; &#x8BF7;&#x6C42;&#x6307;&#x5B9A;&#x7684;&#x9875;&#x9762;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x5B9E;&#x4F53;&#x4E3B;&#x4F53;&#x3002; 
-2. HEAD&#xFF1A; &#x53EA;&#x8BF7;&#x6C42;&#x9875;&#x9762;&#x7684;&#x9996;&#x90E8;&#x3002; 
-3. POST&#xFF1A; &#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x63A5;&#x53D7;&#x6240;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x6863;&#x4F5C;&#x4E3A;&#x5BF9;&#x6240;&#x6807;&#x8BC6;&#x7684;URI&#x7684;&#x65B0;&#x7684;&#x4ECE;&#x5C5E;&#x5B9E;&#x4F53;&#x3002; 
-4. PUT&#xFF1A; &#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x5411;&#x670D;&#x52A1;&#x5668;&#x4F20;&#x9001;&#x7684;&#x6570;&#x636E;&#x53D6;&#x4EE3;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x6863;&#x7684;&#x5185;&#x5BB9;&#x3002; 
-5. DELETE&#xFF1A; &#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x5220;&#x9664;&#x6307;&#x5B9A;&#x7684;&#x9875;&#x9762;&#x3002; 
-6. OPTIONS&#xFF1A; &#x5141;&#x8BB8;&#x5BA2;&#x6237;&#x7AEF;&#x67E5;&#x770B;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6027;&#x80FD;&#x3002; 
-7. TRACE&#xFF1A; &#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x5728;&#x54CD;&#x5E94;&#x4E2D;&#x7684;&#x5B9E;&#x4F53;&#x4E3B;&#x4F53;&#x90E8;&#x5206;&#x8FD4;&#x56DE;&#x6240;&#x5F97;&#x5230;&#x7684;&#x5185;&#x5BB9;&#x3002; 
-8. CONNECT&#xFF1A;HTTP/1.1&#x534F;&#x8BAE;&#x4E2D;&#x9884;&#x7559;&#x7ED9;&#x80FD;&#x591F;&#x5C06;&#x8FDE;&#x63A5;&#x6539;&#x4E3A;&#x7BA1;&#x9053;&#x65B9;&#x5F0F;&#x7684;&#x4EE3;&#x7406;&#x670D;&#x52A1;&#x5668;&#x3002;
-9. PATCH&#xFF1A; &#x5B9E;&#x4F53;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x8868;&#xFF0C;&#x8868;&#x4E2D;&#x8BF4;&#x660E;&#x4E0E;&#x8BE5;URI&#x6240;&#x8868;&#x793A;&#x7684;&#x539F;&#x5185;&#x5BB9;&#x7684;&#x533A;&#x522B;&#x3002; 
-10. MOVE&#xFF1A; &#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x5C06;&#x6307;&#x5B9A;&#x7684;&#x9875;&#x9762;&#x79FB;&#x81F3;&#x53E6;&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x3002; 
-11. COPY&#xFF1A; &#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x5C06;&#x6307;&#x5B9A;&#x7684;&#x9875;&#x9762;&#x62F7;&#x8D1D;&#x81F3;&#x53E6;&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x5730;&#x5740;&#x3002; 
-12. LINK&#xFF1A; &#x8BF7;&#x6C42;&#x670D;&#x52A1;&#x5668;&#x5EFA;&#x7ACB;&#x94FE;&#x63A5;&#x5173;&#x7CFB;&#x3002; 
-13. UNLINK&#xFF1A; &#x65AD;&#x5F00;&#x94FE;&#x63A5;&#x5173;&#x7CFB;&#x3002; 
-14. WRAPPED&#xFF1A; &#x5141;&#x8BB8;&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x7ECF;&#x8FC7;&#x5C01;&#x88C5;&#x7684;&#x8BF7;&#x6C42;&#x3002; 
-15. Extension-mothed&#xFF1A;&#x5728;&#x4E0D;&#x6539;&#x52A8;&#x534F;&#x8BAE;&#x7684;&#x524D;&#x63D0;&#x4E0B;&#xFF0C;&#x53EF;&#x589E;&#x52A0;&#x53E6;&#x5916;&#x7684;&#x65B9;&#x6CD5;&#x3002; </code></pre>
-<p><code>&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x5E38;&#x7528;&#x7684;&#x4E5F;&#x5C31;&#x662F;get&#x548C;post&#xFF0C;&#x5176;&#x4ED6;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#x4E5F;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8FD9;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x95F4;&#x63A5;&#x7684;&#x6765;&#x5B9E;&#x73B0;&#x3002;</code></p>
-<h3 id="&#x7B80;&#x5355;&#x7684;&#x8BF7;&#x6C42;&#x62A5;&#x6587;"><a href="#&#x7B80;&#x5355;&#x7684;&#x8BF7;&#x6C42;&#x62A5;&#x6587;" class="headerlink" title="&#x7B80;&#x5355;&#x7684;&#x8BF7;&#x6C42;&#x62A5;&#x6587;"></a>&#x7B80;&#x5355;&#x7684;&#x8BF7;&#x6C42;&#x62A5;&#x6587;</h3><pre><code>GET /index.html HTTP/1.1 
-Accept: text/plain /*&#x7EAF;ASCII&#x7801;&#x6587;&#x672C;&#x6587;&#x4EF6;*/ 
-Accept: text/html /*HTML&#x6587;&#x672C;&#x6587;&#x4EF6;*/ 
-User-Agent:Mozilla/4.5(WinNT) </code></pre>
-<p>&#x8BF4;&#x660E;&#x6D4F;&#x89C8;&#x5668;&#x4F7F;&#x7528;Get&#x65B9;&#x6CD5;&#x8BF7;&#x6C42;&#x6587;&#x6863;/index.html&#x3002;&#x6D4F;&#x89C8;&#x5668;&#x5219;&#x53EA;&#x5141;&#x8BB8;&#x63A5;&#x6536;&#x7EAF;ASCII&#x7801;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x548C;HTML&#x6587;&#x672C;&#x6587;&#x4EF6;&#xFF0C;&#x5176;&#x4F7F;&#x7528;&#x7684;&#x5F15;&#x64CE;&#x662F;Mozilla/4.5&#xFF08;Netscape&#xFF09;&#x3002;</p>
-<h2 id="&#x54CD;&#x5E94;-Response"><a href="#&#x54CD;&#x5E94;-Response" class="headerlink" title="&#x54CD;&#x5E94;(Response)"></a>&#x54CD;&#x5E94;(Response)</h2><h3 id="&#x5F53;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x5176;&#x72B6;&#x6001;&#x884C;&#x7684;&#x4FE1;&#x606F;&#x4E3A;HTTP&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x72B6;&#x6001;&#x7801;&#xFF0C;&#x53CA;&#x89E3;&#x91CA;&#x72B6;&#x6001;&#x7801;&#x3002;5&#x79CD;&#x72B6;&#x6001;&#x7801;&#xFF1A;"><a href="#&#x5F53;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x5176;&#x72B6;&#x6001;&#x884C;&#x7684;&#x4FE1;&#x606F;&#x4E3A;HTTP&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x72B6;&#x6001;&#x7801;&#xFF0C;&#x53CA;&#x89E3;&#x91CA;&#x72B6;&#x6001;&#x7801;&#x3002;5&#x79CD;&#x72B6;&#x6001;&#x7801;&#xFF1A;" class="headerlink" title="&#x5F53;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x5176;&#x72B6;&#x6001;&#x884C;&#x7684;&#x4FE1;&#x606F;&#x4E3A;HTTP&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x72B6;&#x6001;&#x7801;&#xFF0C;&#x53CA;&#x89E3;&#x91CA;&#x72B6;&#x6001;&#x7801;&#x3002;5&#x79CD;&#x72B6;&#x6001;&#x7801;&#xFF1A;"></a>&#x5F53;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x65F6;&#xFF0C;&#x5176;&#x72B6;&#x6001;&#x884C;&#x7684;&#x4FE1;&#x606F;&#x4E3A;HTTP&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x72B6;&#x6001;&#x7801;&#xFF0C;&#x53CA;&#x89E3;&#x91CA;&#x72B6;&#x6001;&#x7801;&#x3002;5&#x79CD;&#x72B6;&#x6001;&#x7801;&#xFF1A;</h3><pre><code>1.  &#x5BA2;&#x6237;&#x65B9;&#x9519;&#x8BEF; 
-100&#x3000; &#x7EE7;&#x7EED; 
-101&#x3000; &#x4EA4;&#x6362;&#x534F;&#x8BAE; 
-2.  &#x6210;&#x529F; 
-200 &#x3000;OK 
-201 &#x3000;&#x5DF2;&#x521B;&#x5EFA; 
-202&#x3000; &#x63A5;&#x6536; 
-203&#x3000; &#x975E;&#x8BA4;&#x8BC1;&#x4FE1;&#x606F; 
-204&#x3000; &#x65E0;&#x5185;&#x5BB9; 
-205 &#x3000;&#x91CD;&#x7F6E;&#x5185;&#x5BB9; 
-206&#x3000; &#x90E8;&#x5206;&#x5185;&#x5BB9; 
-3.  &#x91CD;&#x5B9A;&#x5411; 
-300 &#x3000;&#x591A;&#x8DEF;&#x9009;&#x62E9; 
-301&#x3000; &#x6C38;&#x4E45;&#x8F6C;&#x79FB; 
-302&#x3000; &#x6682;&#x65F6;&#x8F6C;&#x79FB; 
-303&#x3000; &#x53C2;&#x89C1;&#x5176;&#x5B83; 
-304 &#x3000;&#x672A;&#x4FEE;&#x6539;&#xFF08;Not Modified&#xFF09; 
-305&#x3000; &#x4F7F;&#x7528;&#x4EE3;&#x7406; 
-4.  &#x5BA2;&#x6237;&#x65B9;&#x9519;&#x8BEF; 
-400&#x3000; &#x9519;&#x8BEF;&#x8BF7;&#x6C42;&#xFF08;Bad Request&#xFF09; 
-401 &#x3000;&#x672A;&#x8BA4;&#x8BC1; 
-402 &#x3000;&#x9700;&#x8981;&#x4ED8;&#x8D39; 
-403&#x3000; &#x7981;&#x6B62;&#xFF08;Forbidden&#xFF09; 
-404&#x3000; &#x672A;&#x627E;&#x5230;&#xFF08;Not Found&#xFF09; 
-405&#x3000; &#x65B9;&#x6CD5;&#x4E0D;&#x5141;&#x8BB8; 
-406&#x3000; &#x4E0D;&#x63A5;&#x53D7; 
-407&#x3000; &#x9700;&#x8981;&#x4EE3;&#x7406;&#x8BA4;&#x8BC1; 
-408&#x3000; &#x8BF7;&#x6C42;&#x8D85;&#x65F6; 
-409&#x3000; &#x51B2;&#x7A81; 
-410 &#x3000;&#x5931;&#x8D25; 
-411 &#x3000;&#x9700;&#x8981;&#x957F;&#x5EA6; 
-412&#x3000; &#x6761;&#x4EF6;&#x5931;&#x8D25; 
-413 &#x3000;&#x8BF7;&#x6C42;&#x5B9E;&#x4F53;&#x592A;&#x5927; 
-414 &#x3000;&#x8BF7;&#x6C42;URI&#x592A;&#x957F; 
-415 &#x3000;&#x4E0D;&#x652F;&#x6301;&#x5A92;&#x4F53;&#x7C7B;&#x578B; 
-5.  &#x670D;&#x52A1;&#x5668;&#x9519;&#x8BEF; 
-500&#x3000; &#x670D;&#x52A1;&#x5668;&#x5185;&#x90E8;&#x9519;&#x8BEF; 
-501&#x3000; &#x672A;&#x5B9E;&#x73B0;&#xFF08;Not Implemented&#xFF09; 
-502&#x3000; &#x7F51;&#x5173;&#x5931;&#x8D25; 
-504 &#x3000;&#x7F51;&#x5173;&#x8D85;&#x65F6; 
-505     HTTP&#x7248;&#x672C;&#x4E0D;&#x652F;&#x6301; </code></pre>
-<h3 id="&#x7B80;&#x5355;&#x7684;&#x54CD;&#x5E94;&#x62A5;&#x6587;"><a href="#&#x7B80;&#x5355;&#x7684;&#x54CD;&#x5E94;&#x62A5;&#x6587;" class="headerlink" title="&#x7B80;&#x5355;&#x7684;&#x54CD;&#x5E94;&#x62A5;&#x6587;"></a>&#x7B80;&#x5355;&#x7684;&#x54CD;&#x5E94;&#x62A5;&#x6587;</h3><pre><code>HTTP/1.1 501 Method Not Implemented  (&#x72B6;&#x6001;&#x884C;)
-Server: Apache/1.3.12 /*Web&#x670D;&#x52A1;&#x5668;&#x4FE1;&#x606F;*/ 
-Connect-Type: Text/html; charset=iso-8859-1/*&#x8FDE;&#x63A5;&#x7684;&#x5A92;&#x4F53;&#x7C7B;&#x578B;*/ 
-Allow: GET, HEAD, OPTION, TRACE /*&#x652F;&#x6301;&#x7684;&#x65B9;&#x6CD5;&#x7C7B;&#x578B;*/ 
+<p><strong>HTTP请求包括请求行，请求头，请求正文</strong><br><strong>HTTP响应包括响应行，响应头，响应正文</strong></p>
+<h2 id="请求-Request"><a href="#请求-Request" class="headerlink" title="请求(Request)"></a>请求(Request)</h2><h3 id="HTTP协议中共定义了一些方法来表明对Request-URI指定的资源的不同操作方式。"><a href="#HTTP协议中共定义了一些方法来表明对Request-URI指定的资源的不同操作方式。" class="headerlink" title="HTTP协议中共定义了一些方法来表明对Request-URI指定的资源的不同操作方式。"></a>HTTP协议中共定义了一些方法来表明对Request-URI指定的资源的不同操作方式。</h3><pre><code>1. GET： 请求指定的页面信息，并返回实体主体。 
+2. HEAD： 只请求页面的首部。 
+3. POST： 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体。 
+4. PUT： 从客户端向服务器传送的数据取代指定的文档的内容。 
+5. DELETE： 请求服务器删除指定的页面。 
+6. OPTIONS： 允许客户端查看服务器的性能。 
+7. TRACE： 请求服务器在响应中的实体主体部分返回所得到的内容。 
+8. CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。
+9. PATCH： 实体中包含一个表，表中说明与该URI所表示的原内容的区别。 
+10. MOVE： 请求服务器将指定的页面移至另一个网络地址。 
+11. COPY： 请求服务器将指定的页面拷贝至另一个网络地址。 
+12. LINK： 请求服务器建立链接关系。 
+13. UNLINK： 断开链接关系。 
+14. WRAPPED： 允许客户端发送经过封装的请求。 
+15. Extension-mothed：在不改动协议的前提下，可增加另外的方法。 
+</code></pre>
+<p><code>在实际应用中常用的也就是get和post，其他请求方式也都可以通过这两种方式间接的来实现。</code></p>
+<h3 id="简单的请求报文"><a href="#简单的请求报文" class="headerlink" title="简单的请求报文"></a>简单的请求报文</h3><pre><code>GET /index.html HTTP/1.1 
+Accept: text/plain /*纯ASCII码文本文件*/ 
+Accept: text/html /*HTML文本文件*/ 
+User-Agent:Mozilla/4.5(WinNT) 
+</code></pre>
+<p>说明浏览器使用Get方法请求文档/index.html。浏览器则只允许接收纯ASCII码文本文件和HTML文本文件，其使用的引擎是Mozilla/4.5（Netscape）。</p>
+<h2 id="响应-Response"><a href="#响应-Response" class="headerlink" title="响应(Response)"></a>响应(Response)</h2><h3 id="当服务器响应时，其状态行的信息为HTTP的版本号，状态码，及解释状态码。5种状态码："><a href="#当服务器响应时，其状态行的信息为HTTP的版本号，状态码，及解释状态码。5种状态码：" class="headerlink" title="当服务器响应时，其状态行的信息为HTTP的版本号，状态码，及解释状态码。5种状态码："></a>当服务器响应时，其状态行的信息为HTTP的版本号，状态码，及解释状态码。5种状态码：</h3><pre><code>1.  客户方错误 
+100　 继续 
+101　 交换协议 
+2.  成功 
+200 　OK 
+201 　已创建 
+202　 接收 
+203　 非认证信息 
+204　 无内容 
+205 　重置内容 
+206　 部分内容 
+3.  重定向 
+300 　多路选择 
+301　 永久转移 
+302　 暂时转移 
+303　 参见其它 
+304 　未修改（Not Modified） 
+305　 使用代理 
+4.  客户方错误 
+400　 错误请求（Bad Request） 
+401 　未认证 
+402 　需要付费 
+403　 禁止（Forbidden） 
+404　 未找到（Not Found） 
+405　 方法不允许 
+406　 不接受 
+407　 需要代理认证 
+408　 请求超时 
+409　 冲突 
+410 　失败 
+411 　需要长度 
+412　 条件失败 
+413 　请求实体太大 
+414 　请求URI太长 
+415 　不支持媒体类型 
+5.  服务器错误 
+500　 服务器内部错误 
+501　 未实现（Not Implemented） 
+502　 网关失败 
+504 　网关超时 
+505     HTTP版本不支持 
+</code></pre>
+<h3 id="简单的响应报文"><a href="#简单的响应报文" class="headerlink" title="简单的响应报文"></a>简单的响应报文</h3><pre><code>HTTP/1.1 501 Method Not Implemented  (状态行)
+Server: Apache/1.3.12 /*Web服务器信息*/ 
+Connect-Type: Text/html; charset=iso-8859-1/*连接的媒体类型*/ 
+Allow: GET, HEAD, OPTION, TRACE /*支持的方法类型*/ 
 Connection: close  
-Date: Web, 01 Nov 2000 07:12:29 GMT /*&#x5F53;&#x524D;&#x7684;&#x65E5;&#x671F;/&#x65F6;&#x95F4;*/ </code></pre>
-<h3 id="&#x66F4;&#x591A;&#x7684;&#x5934;&#x5C5E;&#x6027;&#x53C2;&#x8003;"><a href="#&#x66F4;&#x591A;&#x7684;&#x5934;&#x5C5E;&#x6027;&#x53C2;&#x8003;" class="headerlink" title="&#x66F4;&#x591A;&#x7684;&#x5934;&#x5C5E;&#x6027;&#x53C2;&#x8003;"></a>&#x66F4;&#x591A;&#x7684;&#x5934;&#x5C5E;&#x6027;&#x53C2;&#x8003;</h3><p><a target="_blank" rel="noopener" href="http://www.jb51.net/article/51951.htm">HTTP&#x5934;&#x4FE1;&#x606F;&#x603B;&#x7ED3;</a></p>
+Date: Web, 01 Nov 2000 07:12:29 GMT /*当前的日期/时间*/ 
+</code></pre>
+<h3 id="更多的头属性参考"><a href="#更多的头属性参考" class="headerlink" title="更多的头属性参考"></a>更多的头属性参考</h3><p><a target="_blank" rel="noopener" href="http://www.jb51.net/article/51951.htm">HTTP头信息总结</a></p>
 <hr>
-<h2 id="&#x95F2;&#x8C08;"><a href="#&#x95F2;&#x8C08;" class="headerlink" title="&#x95F2;&#x8C08;"></a>&#x95F2;&#x8C08;</h2><h3 id="&#x4F55;&#x4E3A;URI"><a href="#&#x4F55;&#x4E3A;URI" class="headerlink" title="&#x4F55;&#x4E3A;URI"></a>&#x4F55;&#x4E3A;URI</h3><p>Uniform Resource Identifier&#xFF0C;&#x7EDF;&#x4E00;&#x8D44;&#x6E90;&#x6807;&#x8BC6;&#x7B26;&#x3002;<br>Wikipedia&#x7ED9;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#xFF1A;<br><code>A URI reference is either a URI, or a relative reference when it does not begin with a scheme component followed by a colon (:).</code><br>&#x5982;&#x679C;URI&#x5F15;&#x7528;&#x4E0D;&#x662F;&#x4EE5;scheme&#x7EC4;&#x4EF6;&#x5F00;&#x5934;&#xFF0C;&#x540E;&#x8DDF;&#x5192;&#x53F7;(:),&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x662F;URI&#xFF0C;&#x6216;&#x8005;&#x662F;&#x76F8;&#x5BF9;&#x5F15;&#x7528;&#x3002;<br>&#x7B80;&#x5355;&#x6765;&#x8BF4;&#x5C31;&#x662F;<strong>&#x5728;&#x67D0;&#x4E00;&#x89C4;&#x5219;&#x4E0B;&#x6807;&#x8BC6;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#x3002;</strong></p>
-<p>&#x5177;&#x4F53;&#x53C2;&#x8003;&#xFF1A;<a target="_blank" rel="noopener" href="http://wikipedia.moesalih.com/URI">Wiki&#xFF1A;URI</a></p>
+<h2 id="闲谈"><a href="#闲谈" class="headerlink" title="闲谈"></a>闲谈</h2><h3 id="何为URI"><a href="#何为URI" class="headerlink" title="何为URI"></a>何为URI</h3><p>Uniform Resource Identifier，统一资源标识符。<br>Wikipedia给它的定义是：<br><code>A URI reference is either a URI, or a relative reference when it does not begin with a scheme component followed by a colon (:).</code><br>如果URI引用不是以scheme组件开头，后跟冒号(:),那么它就是URI，或者是相对引用。<br>简单来说就是<strong>在某一规则下标识一个资源。</strong></p>
+<p>具体参考：<a target="_blank" rel="noopener" href="http://wikipedia.moesalih.com/URI">Wiki：URI</a></p>
 <hr>
-<h3 id="&#x548C;&#x5E38;&#x8BF4;&#x7684;URL&#x6709;&#x4F55;&#x533A;&#x522B;&#xFF1F;"><a href="#&#x548C;&#x5E38;&#x8BF4;&#x7684;URL&#x6709;&#x4F55;&#x533A;&#x522B;&#xFF1F;" class="headerlink" title="&#x548C;&#x5E38;&#x8BF4;&#x7684;URL&#x6709;&#x4F55;&#x533A;&#x522B;&#xFF1F;"></a>&#x548C;&#x5E38;&#x8BF4;&#x7684;URL&#x6709;&#x4F55;&#x533A;&#x522B;&#xFF1F;</h3><p>URL(Uniform Resource Locator&#xFF0C;&#x7EDF;&#x4E00;&#x8D44;&#x6E90;&#x5B9A;&#x4F4D;&#x7B26;)&#x3002;</p>
-<p>Wikipedia&#x7ED9;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#xFF1A;<br><code>A URL implies the means to access an indicated resource and is denoted by a protocol or an access mechanism.</code><br>URL&#x8868;&#x793A;&#x8BBF;&#x95EE;&#x6307;&#x5B9A;&#x8D44;&#x6E90;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x7531;&#x534F;&#x8BAE;&#x6216;&#x8BBF;&#x95EE;&#x673A;&#x5236;&#x8868;&#x793A;&#x3002;<br><strong>&#x662F;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7684;URI&#xFF0C;&#x4E0D;&#x4EC5;&#x6807;&#x8BC6;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#xFF0C;&#x8FD8;&#x6307;&#x660E;&#x5982;&#x4F55;&#x627E;&#x5230;&#x8FD9;&#x4E2A;&#x8D44;&#x6E90;&#x3002;</strong></p>
-<p>&#x5177;&#x4F53;&#x53C2;&#x8003;&#xFF1A;<a target="_blank" rel="noopener" href="http://wikipedia.moesalih.com/URL">Wiki&#xFF1A;URL</a></p>
+<h3 id="和常说的URL有何区别？"><a href="#和常说的URL有何区别？" class="headerlink" title="和常说的URL有何区别？"></a>和常说的URL有何区别？</h3><p>URL(Uniform Resource Locator，统一资源定位符)。</p>
+<p>Wikipedia给它的定义是：<br><code>A URL implies the means to access an indicated resource and is denoted by a protocol or an access mechanism.</code><br>URL表示访问指定资源的方法，并由协议或访问机制表示。<br><strong>是一种具体的URI，不仅标识一个资源，还指明如何找到这个资源。</strong></p>
+<p>具体参考：<a target="_blank" rel="noopener" href="http://wikipedia.moesalih.com/URL">Wiki：URL</a></p>
 <hr>
 <p>URI = <code>scheme:[[userinfo@]host[:port]]path[?query][#fragment]</code><br>URL = <code>http://www.example.com</code></p>
-<p><strong><code>www.example.com</code>&#x4E0D;&#x662F;URL</strong></p>
-<p>&#x4F8B;&#x5982;&#xFF1A;<code>http://www.127.0.0.1:80/example/example.html</code></p>
-<p>&#x6574;&#x4F53;&#x662F;&#x4E00;&#x4E2A;URL&#xFF0C;&#x800C;<code>/example/example.html</code>&#x662F;URI&#x5F15;&#x7528;&#x3002;</p>
+<p><strong><code>www.example.com</code>不是URL</strong></p>
+<p>例如：<code>http://www.127.0.0.1:80/example/example.html</code></p>
+<p>整体是一个URL，而<code>/example/example.html</code>是URI引用。</p>
 <p><strong>Locators are also identifiers, so every URL is also a URI, but there are URIs which are not URLs.</strong></p>
 </body></html>
     

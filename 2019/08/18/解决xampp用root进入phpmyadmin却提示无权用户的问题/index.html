@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x80CC;&amp;#x666F;">
+    <meta name="description" content="背景">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决xampp用root进入phpmyadmin却提示无权用户的问题">
 <meta property="og:url" content="http://example.com/2019/08/18/%E8%A7%A3%E5%86%B3xampp%E7%94%A8root%E8%BF%9B%E5%85%A5phpmyadmin%E5%8D%B4%E6%8F%90%E7%A4%BA%E6%97%A0%E6%9D%83%E7%94%A8%E6%88%B7%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="&amp;#x80CC;&amp;#x666F;">
+<meta property="og:description" content="背景">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190818184327908.png">
 <meta property="article:published_time" content="2019-08-18T10:22:51.000Z">
@@ -69,7 +69,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -152,16 +152,18 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>&#x80CC;&#x666F;</p>
-<a id="more"></a>
+        <html><head></head><body><p>背景</p>
+<span id="more"></span>
 
-<p>&#x91CD;&#x65B0;&#x88C5;xampp&#x4E4B;&#x540E;&#xFF0C;&#x8BBF;&#x95EE;phpmyadmin&#xFF0C;&#x63D0;&#x793A;&#x6CA1;&#x6709;&#x6743;&#x9650;&#x7F16;&#x8F91;&#x7528;&#x6237;<br><img src="https://img-blog.csdnimg.cn/20190818184327908.png"></p>
-<h2 id="&#x89E3;&#x51B3;&#x65B9;&#x6848;"><a href="#&#x89E3;&#x51B3;&#x65B9;&#x6848;" class="headerlink" title="&#x89E3;&#x51B3;&#x65B9;&#x6848;"></a>&#x89E3;&#x51B3;&#x65B9;&#x6848;</h2><pre><code>/* User for advanced features */
-$cfg[&apos;Servers&apos;][$i][&apos;controluser&apos;] = &apos;pma&apos;;</code></pre>
-<p>&#x6539;&#x4E3A;</p>
+<p>重新装xampp之后，访问phpmyadmin，提示没有权限编辑用户<br><img src="https://img-blog.csdnimg.cn/20190818184327908.png"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><pre><code>/* User for advanced features */
+$cfg['Servers'][$i]['controluser'] = 'pma';
+</code></pre>
+<p>改为</p>
 <pre><code>/* User for advanced features */
-$cfg[&apos;Servers&apos;][$i][&apos;controluser&apos;] = &apos;root&apos;;
-$cfg[&apos;Servers&apos;][$i][&apos;controlpass&apos;] = &apos;&apos;;</code></pre>
+$cfg['Servers'][$i]['controluser'] = 'root';
+$cfg['Servers'][$i]['controlpass'] = '';
+</code></pre>
 </body></html>
     
     </div>

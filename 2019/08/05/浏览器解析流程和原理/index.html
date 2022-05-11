@@ -16,12 +16,12 @@
 
 
 
-    <meta name="description" content="&amp;#x4ECE;&amp;#x8F93;&amp;#x5165; URL &amp;#x5230;&amp;#x9875;&amp;#x9762;&amp;#x52A0;&amp;#x8F7D;&amp;#x5B8C;&amp;#x6210;&amp;#x7684;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x90FD;&amp;#x53D1;&amp;#x751F;&amp;#x4E86;&amp;#x4EC0;&amp;#x4E48;&amp;#x4E8B;&amp;#x60C5;&amp;#xFF1F;">
+    <meta name="description" content="从输入 URL 到页面加载完成的过程中都发生了什么事情？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器解析流程和原理">
 <meta property="og:url" content="http://example.com/2019/08/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B%E5%92%8C%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="TulnersXu&#39;s Blog">
-<meta property="og:description" content="&amp;#x4ECE;&amp;#x8F93;&amp;#x5165; URL &amp;#x5230;&amp;#x9875;&amp;#x9762;&amp;#x52A0;&amp;#x8F7D;&amp;#x5B8C;&amp;#x6210;&amp;#x7684;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x90FD;&amp;#x53D1;&amp;#x751F;&amp;#x4E86;&amp;#x4EC0;&amp;#x4E48;&amp;#x4E8B;&amp;#x60C5;&amp;#xFF1F;">
+<meta property="og:description" content="从输入 URL 到页面加载完成的过程中都发生了什么事情？">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-08-05T10:25:15.000Z">
 <meta property="article:modified_time" content="2021-02-17T12:06:14.453Z">
@@ -67,7 +67,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 <body>
     
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
@@ -180,53 +180,55 @@
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <html><head></head><body><p>&#x4ECE;&#x8F93;&#x5165; URL &#x5230;&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x90FD;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#x4E8B;&#x60C5;&#xFF1F;</p>
-<a id="more"></a>
+        <html><head></head><body><p>从输入 URL 到页面加载完成的过程中都发生了什么事情？</p>
+<span id="more"></span>
 
-<p><strong>&#x5177;&#x4F53;&#x53C2;&#x8003;</strong><br>    <a target="_blank" rel="noopener" href="http://fex.baidu.com/blog/2014/05/what-happen/">nwind&#x7684;fex</a></p>
-<p>&#x8FD9;&#x91CC;&#x76EE;&#x524D;&#x53EA;&#x505A;&#x7B80;&#x5355;&#x9610;&#x8FF0;&#xFF0C;&#x77E5;&#x8BC6;&#x6C34;&#x5E73;&#x672A;&#x5230;&#x3002;</p>
-<h3 id="&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;"></a>&#x4ECE;&#x8F93;&#x5165;URL&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x63A5;&#x53D7;&#x53D1;&#x751F;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;</h3><ol>
-<li>&#x8F93;&#x5165;URL<pre><code> &#x952E;&#x76D8;or&#x89E6;&#x6478;&#x5C4F;</code></pre>
+<p><strong>具体参考</strong><br>    <a target="_blank" rel="noopener" href="http://fex.baidu.com/blog/2014/05/what-happen/">nwind的fex</a></p>
+<p>这里目前只做简单阐述，知识水平未到。</p>
+<h3 id="从输入URL到浏览器接受发生了什么？"><a href="#从输入URL到浏览器接受发生了什么？" class="headerlink" title="从输入URL到浏览器接受发生了什么？"></a>从输入URL到浏览器接受发生了什么？</h3><ol>
+<li>输入URL<pre><code> 键盘or触摸屏
+</code></pre>
 </li>
-<li>CPU&#x5185;&#x90E8;&#x5904;&#x7406;<pre><code> `&#x79FB;&#x52A8;&#x8BBE;&#x5907;&#x4E2D;&#x7684; CPU &#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x82AF;&#x7247;&#xFF0C;&#x800C;&#x662F;&#x548C; GPU &#x7B49;&#x82AF;&#x7247;&#x96C6;&#x6210;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x88AB;&#x79F0;&#x4E3A; SoC&#xFF08;&#x7247;&#x4E0A;&#x7CFB;&#x7EDF;&#xFF09;&#x3002;`</code></pre>
+<li>CPU内部处理<pre><code> `移动设备中的 CPU 并不是一个单独的芯片，而是和 GPU 等芯片集成在一起，被称为 SoC（片上系统）。`
+</code></pre>
 </li>
-<li>CPU&#x5230;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5185;&#x6838;</li>
-<li>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF; GUI &#x5230;&#x6D4F;&#x89C8;&#x5668;</li>
+<li>CPU到操作系统内核</li>
+<li>操作系统 GUI 到浏览器</li>
 </ol>
-<h3 id="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;"></a>&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5411;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF1F;</h3><ol>
-<li><p>&#x6D4F;&#x89C8;&#x5668;&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x6838;</p>
-<p> &#x53EF;&#x4EE5;&#x7528;session&#x6765;&#x63A7;&#x5236;</p>
+<h3 id="浏览器如何向网卡发送数据？"><a href="#浏览器如何向网卡发送数据？" class="headerlink" title="浏览器如何向网卡发送数据？"></a>浏览器如何向网卡发送数据？</h3><ol>
+<li><p>浏览器到浏览器内核</p>
+<p> 可以用session来控制</p>
 </li>
 <li></li>
 </ol>
-<h3 id="&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;"><a href="#&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;" class="headerlink" title="&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;"></a>&#x6570;&#x636E;&#x5982;&#x4F55;&#x4ECE;&#x672C;&#x673A;&#x7F51;&#x5361;&#x53D1;&#x9001;&#x5230;&#x670D;&#x52A1;&#x5668;&#xFF1F;</h3><ol>
-<li>&#x4ECE;&#x5185;&#x6838;&#x5230;&#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;(Network Interface Card)</li>
-<li>&#x8FD0;&#x8425;&#x5546;&#x7F51;&#x7EDC;&#x5185;&#x7684;&#x8DEF;&#x7531;</li>
-<li>&#x4E3B;&#x5E72;&#x7F51;&#x95F4;&#x7684;&#x4F20;&#x8F93;</li>
-<li>IDC &#x5185;&#x7F51;</li>
-<li>&#x670D;&#x52A1;&#x5668; CPU</li>
+<h3 id="数据如何从本机网卡发送到服务器？"><a href="#数据如何从本机网卡发送到服务器？" class="headerlink" title="数据如何从本机网卡发送到服务器？"></a>数据如何从本机网卡发送到服务器？</h3><ol>
+<li>从内核到网络适配器(Network Interface Card)</li>
+<li>运营商网络内的路由</li>
+<li>主干网间的传输</li>
+<li>IDC 内网</li>
+<li>服务器 CPU</li>
 </ol>
-<h3 id="&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;"><a href="#&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;"></a>&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x540E;&#x53F0;&#x4F1A;&#x8FDB;&#x884C;&#x54EA;&#x4E9B;&#x5904;&#x7406;&#xFF1F;</h3><ol>
-<li>&#x8D1F;&#x8F7D;&#x5747;&#x8861;</li>
+<h3 id="服务器接收到数据后台会进行哪些处理？"><a href="#服务器接收到数据后台会进行哪些处理？" class="headerlink" title="服务器接收到数据后台会进行哪些处理？"></a>服务器接收到数据后台会进行哪些处理？</h3><ol>
+<li>负载均衡</li>
 <li>LVS</li>
-<li>&#x53CD;&#x5411;&#x4EE3;&#x7406;</li>
-<li>Web Server&#x4E2D;&#x7684;&#x5904;&#x7406;</li>
-<li>&#x8FDB;&#x5165;&#x540E;&#x7AEF;&#x8BED;&#x8A00;</li>
-<li>Web&#x6846;&#x67B6;</li>
-<li>&#x8BFB;&#x53D6;&#x6570;&#x636E;</li>
+<li>反向代理</li>
+<li>Web Server中的处理</li>
+<li>进入后端语言</li>
+<li>Web框架</li>
+<li>读取数据</li>
 </ol>
-<h3 id="&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;"><a href="#&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;"></a>&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x540E;&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5904;&#x7406;&#xFF1F;</h3><ol>
-<li>&#x4ECE;&#x4E8C;&#x8FDB;&#x5236;&#x4EE3;&#x7801;&#x5230;&#x5B57;&#x7B26;</li>
-<li>&#x5916;&#x94FE;&#x8D44;&#x6E90;&#x7684;&#x52A0;&#x8F7D;</li>
-<li>Javascript&#x7684;&#x6267;&#x884C;</li>
-<li>&#x4ECE;&#x5B57;&#x7B26;&#x5230;&#x56FE;&#x7247;</li>
-<li>&#x8DE8;&#x5E73;&#x53F0;2D&#x7ED8;&#x5236;&#x5E93;</li>
-<li>GPU&#x5408;&#x6210;</li>
+<h3 id="服务器返回数据后浏览器如何处理？"><a href="#服务器返回数据后浏览器如何处理？" class="headerlink" title="服务器返回数据后浏览器如何处理？"></a>服务器返回数据后浏览器如何处理？</h3><ol>
+<li>从二进制代码到字符</li>
+<li>外链资源的加载</li>
+<li>Javascript的执行</li>
+<li>从字符到图片</li>
+<li>跨平台2D绘制库</li>
+<li>GPU合成</li>
 </ol>
-<p>**&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuezk/archive/2013/01/11/2855698.html">HTML&#x9875;&#x9762;&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;</a></p>
-<h3 id="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;"><a href="#&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;" class="headerlink" title="&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;"></a>&#x6D4F;&#x89C8;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x9875;&#x9762;&#x5C55;&#x73B0;&#x51FA;&#x6765;&#xFF1F;</h3><ol>
-<li>Framebuffer(&#x5E27;&#x7F13;&#x5B58;&#x5668;)</li>
-<li>&#x4ECE;&#x5185;&#x5B58;&#x5230;&#x663E;&#x793A;&#x5668;</li>
+<p>**这一部分可以参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yuezk/archive/2013/01/11/2855698.html">HTML页面渲染过程</a></p>
+<h3 id="浏览器如何将页面展现出来？"><a href="#浏览器如何将页面展现出来？" class="headerlink" title="浏览器如何将页面展现出来？"></a>浏览器如何将页面展现出来？</h3><ol>
+<li>Framebuffer(帧缓存器)</li>
+<li>从内存到显示器</li>
 </ol>
 </body></html>
     
